@@ -28,7 +28,7 @@ class AstrometryNet < Formula
 
   def install
     ENV.j1
-    ENV["INSTALL_DIR"] = "#{prefix}"
+    ENV["INSTALL_DIR"] = prefix.to_s
     ENV["NETPBM_INC"] = "-I#{Formula["netpbm"].opt_include}/netpbm"
     ENV["NETPBM_LIB"] = "-L#{Formula["netpbm"].opt_lib} -lnetpbm"
     ENV["SYSTEM_GSL"] = "yes"
