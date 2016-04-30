@@ -6,6 +6,8 @@ class AstrometryNet < Formula
 
   head "https://github.com/dstndstn/astrometry.net.git"
 
+  option "without-extras", "Don't try to build plotting code (actually it will still try, but homebrew won't halt the install if it fails)"
+
   depends_on "swig" => :build
   depends_on "pkg-config" => :build
   depends_on "wget"
@@ -24,8 +26,6 @@ class AstrometryNet < Formula
   # this formula includes python bindings
   depends_on :python => :recommended
 
-  option "without-extras", "Don't try to build plotting code (actually it will still try, but homebrew won't halt the install if it fails)"
-
   def install
     ENV.j1
     ENV["INSTALL_DIR"] = "#{prefix}"
@@ -34,8 +34,8 @@ class AstrometryNet < Formula
     ENV["SYSTEM_GSL"] = "yes"
 
     system "make"
-    system "make extra" if build.with? "extras"
-    system "make py"    if build.with? "python"
+    system "make", "extra" if build.with? "extras"
+    system "make", "py"    if build.with? "python"
     system "make", "install"
   end
 
